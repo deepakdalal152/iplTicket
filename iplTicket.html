@@ -123,13 +123,96 @@
             this._totalFloors = [];
             for(let i = 0 ; i < numberOfFloors; i++)
             {
-                this._totalFloors.push(new Floor(i,25))
+                this._totalFloors.push(new Floor(i,2))
             }
+        }
+        get totalFloors()
+        {
+            return this._totalFloors
         }
     }
 
-let ticket =  new Statdium(5)
 
-console.log(ticket)
+    // Ticket Window----------------
+
+    class TicketWindow {
+        constructor(stadium)
+        {
+            this._stadium = stadium
+        }
+
+        // looking for empty Seat---------------------------
+        findEmptySeat(findSeatCatagery)
+        {
+
+            let getSeat;
+            this._stadium._totalFloors.forEach(function(currentFloor,currentFloorNumber){
+
+                    currentFloor._totalSeats.forEach(function(currentSeat,currentSeatNumber){
+
+
+                        if(currentSeat._sCatagery == findSeatCatagery && !currentSeat.isBooked)
+                        {
+
+                            getSeat = {currentFloorNumber,currentSeatNumber,currentSeat};
+
+                            return;
+                        }
+                        
+                    })
+
+                })
+                return getSeat;
+
+        }
+        // sending data to empty Seat--------------------------
+        bookEmptySeat(emptySeatData,seatCatagery)
+        {
+            // getting empty floor number and seat number----------
+            let currentFloor = emptySeatData.currentFloorNumber
+            let currentSeat = emptySeatData.currentSeatNumber
+            // getting userData--------------
+            let userGender = seatCatagery._tGender
+            let userAge = seatCatagery._tAge
+
+            // setting userData-----------
+            this._stadium._totalFloors[currentFloor]._totalSeats[currentSeat]._isBooked = true;
+            this._stadium._totalFloors[currentFloor]._totalSeats[currentSeat]._sAge = userAge;
+            this._stadium._totalFloors[currentFloor]._totalSeats[currentSeat]._sGender = userGender;
+
+
+            // console.log(this._stadium._totalFloors[currentFloor]._totalSeats[currentSeat])
+        }
+        // booking Ticket and Sending Info to user-------------
+        bookTicket(seatCatagery)
+        {
+            let emptySeat = this.findEmptySeat(seatCatagery._tCatagery)
+            if(emptySeat)
+            {
+                this.bookEmptySeat(emptySeat,seatCatagery)
+                console.log("Your Ticket has been booked:", emptySeat)
+                return true;
+            }
+            else{
+                console.log("No Seat available")
+                return false;
+            }
+        }
+    }
+    // creating Stadium, floors, and seats------------- 
+    let stadium1 =  new Statdium(2)
+
+    //creating Ticket Booking System for "STADIUM1"----------
+
+    let ticketWindow =  new TicketWindow(stadium1)
+
+    // creating test Users--------------
+
+    let u1 = new Ticket(35,"Male","vvip")
+    let u2 = new Ticket(25,"Female","vvip")
+    let u3 = new Ticket(20,"Female","general")
+
+
+ticketWindow.bookTicket(u1)
 
 </script>
