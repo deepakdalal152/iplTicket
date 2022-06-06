@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+
+<script>
+
+    //  create Ticket Details------------
+
+    class Ticket{
+        constructor(tAge, tGender, tCatagery)
+        {
+            this._tAge = tAge;
+            this._tGender = tGender;
+            this._tCatagery = tCatagery
+        }
+    }
+
+    // create seat Details-----------
+
+    class Seat{
+        constructor(sAge, sGender, sCatagery)
+        {
+            this._sAge = sAge;
+            this._sGender = sGender;
+            this._sCatagery = sCatagery;
+        }
+    }
+    // creating Seat Catagery------------
+
+    // 1. General Catagery
+
+    class General extends Seat{
+        constructor(gAge, gGender)
+        {
+            super(gAge,gGender,"general")
+            this._isBooked = false;
+        }
+        get isBooked()
+        {
+            return this._isBooked;
+        }
+        set isBooked(value)
+        {
+            this._isBooked = value;
+        }    }
+    // 2, VIP catagery------------
+
+    class Vip extends Seat{
+        constructor(vAge,vGender)
+        {
+            super(vAge,vGender,"vip")
+            this._isBooked = false;
+        }
+        get isBooked()
+        {
+            return this._isBooked;
+        }
+        set isBooked(value)
+        {
+            this._isBooked = value;
+        }    }
+    // 3. VVIP catagery-------------
+
+    class Vvip extends Seat{
+        constructor(vvAge, vvGender)
+        {
+            super(vvAge,vvGender,"vvip")
+            this._isBooked = false;
+        }
+        get isBooked()
+        {
+            return this._isBooked;
+        }
+        set isBooked(value)
+        {
+            this._isBooked = value;
+        }    }
+    // total Seat on the floor-----------------
+    class Floor{
+        constructor(currenFloor, numberOfSeats)
+        {
+            this._currentFloor = currenFloor;
+            this._totalSeats = []
+            for(let i = 0; i < numberOfSeats; i++)
+            {
+                if(i % 7 === 0)
+                {
+                    this._totalSeats.push(new Vvip())
+                }
+                else if(i % 3 === 0)
+                {
+                    this._totalSeats.push(new Vip())
+                }
+                else{
+                    this._totalSeats.push(new General())
+                }
+            }
+        }
+        get currentFloor()
+        {
+            return this._currentFloor
+        }
+        set currenFloor(value)
+        {
+            this._currentFloor = value;
+        }
+    }
+    //  total floors in the stadium------------
+
+    class Statdium{
+        constructor(numberOfFloors)
+        {
+            this._floorsCount = numberOfFloors;
+            this._totalFloors = [];
+            for(let i = 0 ; i < numberOfFloors; i++)
+            {
+                this._totalFloors.push(new Floor(i,25))
+            }
+        }
+    }
+
+let ticket =  new Statdium(5)
+
+console.log(ticket)
+
+</script>
