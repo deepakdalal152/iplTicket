@@ -123,7 +123,9 @@
             this._totalFloors = [];
             for(let i = 0 ; i < numberOfFloors; i++)
             {
-                this._totalFloors.push(new Floor(i,2))
+                //  we can set the count of seats per floor here ------------
+                let createSeats = 5
+                this._totalFloors.push(new Floor(i,createSeats))
             }
         }
         get totalFloors()
@@ -199,8 +201,8 @@
             }
         }
     }
-    // creating Stadium, floors, and seats------------- 
-    let stadium1 =  new Statdium(2)
+    // creating Stadium, floors, and seats-----Enter the number of floors at the time of stadium creation-------- 
+    let stadium1 =  new Statdium(5)
 
     //creating Ticket Booking System for "STADIUM1"----------
 
@@ -214,5 +216,6 @@
 
 
 ticketWindow.bookTicket(u1)
+console.log(stadium1)
 
 </script>
